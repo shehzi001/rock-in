@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/eren/ros/hydro/youbot_ws/src/binary_bitbots/devel/setup.sh

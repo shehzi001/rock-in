@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "basic_navigation")
+set(basic_navigation_MAINTAINER "eren <eren@todo.todo>")
+set(basic_navigation_DEPRECATED "")
+set(basic_navigation_VERSION "0.0.0")
+set(basic_navigation_BUILD_DEPENDS "geometry_msgs" "brics_actuator" "roscpp")
+set(basic_navigation_RUN_DEPENDS "brics_actuator" "geometry_msgs" "roscpp")
+set(basic_navigation_BUILDTOOL_DEPENDS "catkin")
