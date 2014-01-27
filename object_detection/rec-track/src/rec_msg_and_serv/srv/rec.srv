@@ -1,0 +1,5 @@
+sensor_msgs/Image image
+---
+std_msgs/String[] models_found
+float32[] confidences_found
+geometry_msgs/Pose[] poses_found

@@ -1,0 +1,41 @@
+Copyright (c) 2013, Vienna University of Technology. All rights reserved.
+please read the LICENSE file
+
+Authors:
+    Thomas Moerwald, moerwald(at)acin.tuwien.ac.at
+    Johann Prankl
+    Michael Zillich
+    Markus Vincze
+
+Modules:
+    - TomGine (OpenGL rendering, geometry)
+    - TomGineIP (OpenGL image processing)
+    - Tracker (OpenGL object tracking)
+    - Recognizer3D (SIFT based object recognition)
+
+Executables:
+    - trackerQt (Qt interface for object tracking and recognition)
+
+Requirements:
+    Linux (Ubuntu,...)
+	rt		(real-time clock)
+	freeglut3-dev
+    libglew1.6-dev
+	libftgl2, libftgl-dev (render text in OpenGL)
+	OpenCV    
+
+Installation:
+    cd ${INSTALL_DIR}/3.0
+    mkdir build
+    cd build
+    cmake ..
+    make
+    sudo make install
+
+Execution:
+    cd ${INSTALL_DIR}/3.0/bin
+    ./trackerQt
+
+Troubleshooting:
+    mail: moerwald(at)acin.tuwien.ac.at
+
