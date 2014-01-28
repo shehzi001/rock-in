@@ -1,0 +1,10 @@
+<launch>
+
+	<include file="$(find openni2_launch)/launch/openni2.launch" />
+
+	<node pkg="marker_localization" type="agent_marker_localization_node" name="agent_marker_localization_node" output="screen">
+		<!--remap from="datamatrix" to="/datamatrix" /-->
+	</node>
+	<node pkg="datamatrix_finder" type="datamatrix_finder_node" name="datamatrix_finder_node" args="0.2" output="screen"/>
+
+</launch>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package>
+  <name>marker_localization</name>
+  <version>0.0.0</version>
+  <description>applies sharpening filter</description>
+  <maintainer email="bipin@todo.todo">bipin</maintainer>
+
+  <license>GPLv3</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  
+  <build_depend>dynamic_reconfigure</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>cv_bridge</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>datamatrix_finder</build_depend>
+  <build_depend>message_filters</build_depend>
+  <build_depend>message_generation</build_depend>
+  <build_depend>tf</build_depend>
+  <run_depend>message_runtime</run_depend>
+  
+</package>
