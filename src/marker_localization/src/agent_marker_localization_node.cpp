@@ -81,8 +81,7 @@ int main(int argc, char** argv) {
 	
 	ros::Time now = ros::Time::now();
 	bool transform_flag = listener.waitForTransform("/base_footprint","/datamatrix_frame", now, ros::Duration(1.0));
-		if(!transform_flag)
-		{	
+		
 			try 
 			{   
 				listener.lookupTransform("/base_footprint","/datamatrix_frame", now , transform);
@@ -90,9 +89,7 @@ int main(int argc, char** argv) {
 			} catch (tf::TransformException ex) {
 				ROS_ERROR("%s",ex.what());
 			}
-			ros::spinOnce();
-			rate.sleep();
-		}
+		
 	}
 	 
 	
