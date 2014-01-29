@@ -122,7 +122,7 @@ void callback(const ImageConstPtr& image, const CameraInfoConstPtr& cam_info) {
   DataMatrixInfo dataMatrixInfo = decode(cvRgbImage->image, cam_info, 100);
 	
   if(!dataMatrixInfo.message.empty()) {
-   
+    static tf::TransformBroadcaster br;
     tf::Transform transform;
     transform.setOrigin(tf::Vector3(dataMatrixInfo.transformation.at<float>(0, 3),
 				    dataMatrixInfo.transformation.at<float>(1, 3),
