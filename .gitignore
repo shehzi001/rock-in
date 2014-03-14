@@ -1,0 +1,5 @@
+#ignore temporary files
+*~
+#ignore build and bin folder
+build/
+bin/
