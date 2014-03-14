@@ -1,8 +1,0 @@
-prefix=/home/eren/ros/hydro/youbot_ws/src/binary_bitbots/install
-
-Name: basic_navigation
-Description: Description of basic_navigation
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/eren/ros/hydro/youbot_ws/src/binary_bitbots/install/lib 
-Requires: 

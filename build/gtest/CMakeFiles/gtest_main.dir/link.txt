@@ -1,1 +1,0 @@
-/usr/bin/c++  -fPIC    -shared -Wl,-soname,libgtest_main.so -o libgtest_main.so CMakeFiles/gtest_main.dir/src/gtest_main.cc.o -L/home/eren/ros/hydro/youbot_ws/src/binary_bitbots/build/gtest/src -lpthread libgtest.so -lpthread -Wl,-rpath,/home/eren/ros/hydro/youbot_ws/src/binary_bitbots/build/gtest/src:/home/eren/ros/hydro/youbot_ws/src/binary_bitbots/build/gtest 
