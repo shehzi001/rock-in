@@ -131,7 +131,7 @@ void callback(const ImageConstPtr& image, const CameraInfoConstPtr& cam_info) {
     quaternion.normalize();
     transform.setRotation(tf::Quaternion(quaternion.x(), quaternion.y(), quaternion.z(), quaternion.w()));
     //br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "camera_rgb_optical_frame", "datamatrix_frame"));
-		br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "tower_cam3d_depth_optical_frame", "datamatrix_frame"));
+	br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "tower_cam3d_rgb_optical_frame", "datamatrix_frame"));
     datamatrix_finder::Datamatrix msg;
     msg.message = dataMatrixInfo.message;
     for(int i = 0; i < msg.translation.size(); i++) {
@@ -162,10 +162,10 @@ int main(int argc, char** argv) {
 
   datamatrix_pub = nh.advertise<datamatrix_finder::Datamatrix>("datamatrix", 1000);
 
-  //message_filters::Subscriber<sensor_msgs::Image> image_sub(nh, "/camera/rgb/image_rect_color", 1);
-  message_filters::Subscriber<sensor_msgs::Image> image_sub(nh, "/tower_cam3d/rgb/image_rect_color", 1);
-  //message_filters::Subscriber<sensor_msgs::CameraInfo> info_sub(nh, "/camera/rgb/camera_info", 1);
-  message_filters::Subscriber<sensor_msgs::CameraInfo> info_sub(nh, "/tower_cam3d/rgb/camera_info", 1);
+  message_filters::Subscriber<sensor_msgs::Image> image_sub(nh, "/camera/rgb/image_rect_color", 1);
+  //message_filters::Subscriber<sensor_msgs::Image> image_sub(nh, "/tower_cam3d_camera/rgb/image_rect_color", 1);
+  message_filters::Subscriber<sensor_msgs::CameraInfo> info_sub(nh, "/camera/rgb/camera_info", 1);
+  //message_filters::Subscriber<sensor_msgs::CameraInfo> info_sub(nh, "/tower_cam3d_camera/rgb/camera_info", 1);
   typedef sync_policies::ApproximateTime<Image, CameraInfo> MySyncPolicy;
   Synchronizer<MySyncPolicy> sync(MySyncPolicy(20), image_sub, info_sub);
   sync.registerCallback(boost::bind(&callback, _1, _2));
