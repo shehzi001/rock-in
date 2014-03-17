@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package>
+  <name>goto_datamatrix</name>
+  <version>1.0.0</version>
+  <description>	
+				This node is a listener for the datamatrix transformation with respect
+				to the frame of the move it planner (base_footprint) and publishes on
+				the /goal_end_effector_pose topic to move the arm to that position
+				using move it. an offset on z may be added for safety reasons since
+				datamatrix pattern is a flat sheet of paper and gripper may collide
+				with the floor if this z offset is not added.
+  </description>
+
+  <maintainer email="olima_84@yahoo.com">Oscar Lima</maintainer>
+  <license>BSD</license>
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>tf</build_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>tf</run_depend>
+  <export>
+  </export>
+</package>
