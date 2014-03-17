@@ -1,0 +1,92 @@
+/*
+	jacobian_sudo_inv = jacobian.transpose() * (jacobian * jacobian.transpose()).inverse();
+	
+	//error = (identity-jacobian * jacobian_sudo_inv)*delta_cart;
+	//delta_theta = jacobian_sudo_inv * delta_cart;
+	
+	//ROS_INFO_STREAM("Error:\n " << error);
+	//ROS_INFO_STREAM("delta_theta:\n " << delta_theta);
+	* */
+	//ROS_INFO_STREAM("jacobian:\n " << jacobian);
+	//ROS_INFO_STREAM("jacobian sudo inv:\n " << jacobian_sudo_inv);
+	
+	
+	
+	
+	/*
+	Eigen::VectorXd delta_cart(6);
+	Eigen::VectorXd delta_theta(5);
+	Eigen::VectorXd error(6);
+	Eigen::MatrixXd identity(6,6);
+	identity << 1.0,1.0,1.0,1.0,1.0,1.0,
+								1.0,1.0,1.0,1.0,1.0,1.0,
+								1.0,1.0,1.0,1.0,1.0,1.0,
+								1.0,1.0,1.0,1.0,1.0,1.0,
+								1.0,1.0,1.0,1.0,1.0,1.0,
+								1.0,1.0,1.0,1.0,1.0,1.0;
+								
+   delta_cart << 0,0,-0.1,0.0,0.0,0.0;
+   */
+  //Eigen::VectorXd jointState(5);
+	//for(int i = 0;i < 5;i++)
+	//jointState[i] = joint_vals)[i];
+	
+/*
+void moveit_ik(const Eigen::Affine3d &end_effector_state)
+{
+	bool found_ik = kinematic_state->setFromIK(joint_model_group, end_effector_state, 10, 0.1);
+  
+  if(found_ik)
+	{
+		kinematic_state->copyJointGroupPositions(joint_model_group, joint_values);
+		for(std::size_t i=0; i < joint_names.size(); ++i)
+		{
+			ROS_INFO("Joint %d: %f",i, joint_values[i]);
+		}
+	}
+	else
+	{
+		ROS_INFO("Did not find IK solution");
+	}
+}
+*/
+
+//initialJoints << randomInRange(min_jl[0],max_jl[0]), randomInRange(min_jl[1],max_jl[1]),
+		//                                 randomInRange(min_jl[2],max_jl[2]), randomInRange(min_jl[3],max_jl[3]),
+		//                                 randomInRange(min_jl[4],max_jl[4]);
+		
+		//finalJoints << randomInRange(min_jl[0],max_jl[0]), randomInRange(min_jl[1],max_jl[1]),
+		//                                 randomInRange(min_jl[2],max_jl[2]), randomInRange(min_jl[3],max_jl[3]),
+		//                                 randomInRange(min_jl[4],max_jl[4]);
+
+
+//ROS_INFO_STREAM("jacPseudoInv:\n " << jacPseudoInv);
+		
+//std::cout<<"Initial dist: "<<(finalPose-initialPose);
+
+
+
+
+================================================================
+
+double dotProduct = (newJoints - finalJoints).normalized().dot((newJoints - finalJoints).normalized());
+		
+		std::cout<<"\nManipulator test dot product: "<<dotProduct<<std::endl;
+		
+		//if(dotProduct > 0.9)
+		  if(checkJointLimits(newJoints))
+		  {
+				std::vector<double> temp1(5);
+				std::vector<double> temp2(5);
+				for(int i=0;i < 5 ;i++)
+				{
+				 temp1[i] = initialJoints[i]; 
+				 temp2[i] = newJoints[i]; 
+				}
+		   moveit_move(temp1);
+		   sleep(5);
+		   moveit_move(temp2);
+		  }
+		//std::cout<<"Initial dist: "<<(finalPose-initialPose).norm()<<" Final dist: "<<(finalPose-newPose).norm()<<std::endl;
+		
+		=============================================================
