@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package>
+  <name>arm_goal</name>
+  <version>1.0.0</version>
+  <description>	
+				This node publishes on move it goal topic so that the arm
+				can be driven by move it package to a certain pose goal.
+				First must listen to the transform between base footprint and virtual object,
+				then publishes geometry message Pose.
+  </description>
+
+  <maintainer email="olima_84@yahoo.com">Oscar Lima</maintainer>
+  <license>BSD</license>
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>tf</build_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>tf</run_depend>
+  <export>
+  </export>
+</package>
