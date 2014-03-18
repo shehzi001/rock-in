@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package>
+  <name>virtual_object</name>
+  <version>1.0.0</version>
+  <description>	
+				This node creates a virtual object frame by listenning to the 
+				datamatrix transformation, creating a child transform with flat
+				orientation and broadcasting a /virtual_object transform with
+				a z offset.
+  </description>
+
+  <maintainer email="olima_84@yahoo.com">Oscar Lima</maintainer>
+  <license>BSD</license>
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>tf</build_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>tf</run_depend>
+  <export>
+  </export>
+</package>

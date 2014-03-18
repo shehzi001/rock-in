@@ -1,0 +1,27 @@
+<launch>
+
+	<!-- arguments -->
+	<arg name="sim" default="true" />
+	<arg name="datamatrix_size" default="0.095" />
+	
+	<!-- bringup -->
+		<!-- real robot related launches -->
+		<group unless="$(arg sim)">
+			<include file="$(find mir_bringup)/robot.launch" /> <!-- base components -->
+		</group>
+
+		<!-- simulation related launches -->
+		<group if="$(arg sim)">
+			<include file="$(find mir_bringup_sim)/robot.launch" /> <!-- base components -->
+		</group>
+	
+	<!-- openni2 for rgb data input -->
+	<include file="$(find openni2_launch)/launch/openni2.launch" />
+
+	<!-- datamatrix finder node -->
+	<node pkg="datamatrix_finder" type="datamatrix_finder_node" name="datamatrix_finder_node" args="$(arg datamatrix_size)" output="screen" required="true"/>
+	
+	<!-- virtual object node -->
+	<node pkg="virtual_object" type="virtual_object" name="virtual_object" output="screen" required="true"/>
+
+</launch>
