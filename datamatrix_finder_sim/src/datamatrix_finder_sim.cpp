@@ -147,7 +147,7 @@ void callback(const ImageConstPtr& image, const CameraInfoConstPtr& cam_info) {
 }
 
 int main(int argc, char** argv) {
-  ros::init(argc, argv, "datamatrix_finder_node");
+  ros::init(argc, argv, "datamatrix_finder_node_sim");
 
   if(argc < 2) {
     std::cerr << "Usage: " << std::endl;
@@ -162,10 +162,10 @@ int main(int argc, char** argv) {
 
   datamatrix_pub = nh.advertise<datamatrix_finder::Datamatrix>("datamatrix", 1000);
 
-  //message_filters::Subscriber<sensor_msgs::Image> image_sub(nh, "/camera/rgb/image_rect_color", 1);
-  message_filters::Subscriber<sensor_msgs::Image> image_sub(nh, "/tower_cam3d/rgb/image_rect_color", 1);
-  //message_filters::Subscriber<sensor_msgs::CameraInfo> info_sub(nh, "/camera/rgb/camera_info", 1);
-  message_filters::Subscriber<sensor_msgs::CameraInfo> info_sub(nh, "/tower_cam3d/rgb/camera_info", 1);
+  message_filters::Subscriber<sensor_msgs::Image> image_sub(nh, "/camera/rgb/image_rect_color", 1);
+  //message_filters::Subscriber<sensor_msgs::Image> image_sub(nh, "/tower_cam3d/rgb/image_rect_color", 1);
+  message_filters::Subscriber<sensor_msgs::CameraInfo> info_sub(nh, "/camera/rgb/camera_info", 1);
+  //message_filters::Subscriber<sensor_msgs::CameraInfo> info_sub(nh, "/tower_cam3d/rgb/camera_info", 1);
   typedef sync_policies::ApproximateTime<Image, CameraInfo> MySyncPolicy;
   Synchronizer<MySyncPolicy> sync(MySyncPolicy(20), image_sub, info_sub);
   sync.registerCallback(boost::bind(&callback, _1, _2));

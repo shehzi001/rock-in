@@ -15,11 +15,13 @@ int main(int argc, char** argv)
 	tf::TransformListener listener;
 	
 	double z_offset = 0.1;
-	bool virtual_object_available = true;
+	bool datamatrix_is_present = true;
+	
 	geometry_msgs::Pose virtual_ob_pose;
 	
 	while (node.ok())
 	{
+		datamatrix_is_present = true;
 		try
 		{
 			listener.waitForTransform("/base_footprint", "/datamatrix_frame", ros::Time::now(), ros::Duration(0.8));
@@ -29,30 +31,34 @@ int main(int argc, char** argv)
 		{
 			//ROS_ERROR("%s",ex.what());
 			ROS_INFO("Waiting for /datamatrix_frame transform to appear...");
+			datamatrix_is_present = false;
 		}
 		
-		//creating flat_datamatrix transform from base_footprint but shifted to datamatrix_frame position
-		try
+		if(datamatrix_is_present)
 		{
-			flat_dm.setOrigin( listened_transform.getOrigin() ); //shifting the origin
-			flat_dm.setRotation( tf::Quaternion(0, 0, 0) ); //preserving the orientation of the parent (base_link)
-			tf_broadcaster.sendTransform(tf::StampedTransform(flat_dm, ros::Time::now(), "base_footprint", "flat_datamatrix"));
-		}
-		catch (tf::TransformException ex)
-		{
-			ROS_ERROR("%s",ex.what());
-		}
+			//creating flat_datamatrix transform from base_footprint but shifted to datamatrix_frame position
+			try
+			{
+				flat_dm.setOrigin( listened_transform.getOrigin() ); //shifting the origin
+				flat_dm.setRotation( tf::Quaternion(0, 0, 0) ); //preserving the orientation of the parent (base_link)
+				tf_broadcaster.sendTransform(tf::StampedTransform(flat_dm, ros::Time::now(), "base_footprint", "flat_datamatrix"));
+			}
+			catch (tf::TransformException ex)
+			{
+				ROS_ERROR("%s",ex.what());
+			}
 		
-		//creating virtual_object frame = flat_datamatrix + z offset
-		try
-		{
-			virtual_ob.setOrigin( tf::Vector3(0.0, 0.0, z_offset) ); //shifting the origin
-			virtual_ob.setRotation( tf::Quaternion(0, 0, 0) ); //preserving the orientation of the parent (base_link)
-			tf_broadcaster.sendTransform(tf::StampedTransform(virtual_ob, ros::Time::now(), "flat_datamatrix", "virtual_object"));
-		}
-		catch (tf::TransformException ex)
-		{
-			ROS_ERROR("%s",ex.what());
+			//creating virtual_object frame = flat_datamatrix + z offset
+			try
+			{
+				virtual_ob.setOrigin( tf::Vector3(0.0, 0.0, z_offset) ); //shifting the origin
+				virtual_ob.setRotation( tf::Quaternion(0, 0, 0) ); //preserving the orientation of the parent (base_link)
+				tf_broadcaster.sendTransform(tf::StampedTransform(virtual_ob, ros::Time::now(), "flat_datamatrix", "virtual_object"));
+			}
+			catch (tf::TransformException ex)
+			{
+				ROS_ERROR("%s",ex.what());
+			}
 		}
 		
 		rate.sleep();

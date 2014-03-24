@@ -1,0 +1,37 @@
+<launch>
+
+	<!-- arguments -->
+	<arg name="sim" default="false" />
+	<arg name="datamatrix_size" default="0.127" />
+	
+	<!-- real robot related launches -->
+	<group unless="$(arg sim)">
+		<!-- bringup -->
+		<include file="$(find mir_bringup)/robot.launch" /> <!-- base components -->
+		<!-- datamatrix finder node -->
+		<node pkg="datamatrix_finder" type="datamatrix_finder_node" name="datamatrix_finder_node" args="$(arg datamatrix_size)" output="screen" required="true"/>
+	</group>
+
+	<!-- sim robot related launches -->
+	<group if="$(arg sim)">
+		<!-- bringup sim -->
+		<include file="$(find mir_bringup_sim)/robot.launch" />
+		<!-- openni2 rgb data input -->
+		<include file="$(find openni2_launch)/launch/openni2.launch" />
+		<!-- datamatrix sim -->
+		<node pkg="datamatrix_finder_sim" type="datamatrix_finder_node_sim" name="datamatrix_finder_node_sim" args="$(arg datamatrix_size)" output="screen" required="true"/>
+	</group>
+	
+	<!-- virtual object node -->
+	<node pkg="virtual_object" type="virtual_object" name="virtual_object" output="screen" required="true"/>
+	
+	<!-- move it master -->
+	<include file="$(find mir_moveit_youbot_brsu_2)/launch/move_group.launch"/>
+	
+	<!-- rviz -->
+	<node pkg="rviz" type="rviz" name="rviz" output="screen" required="false"/>
+
+	<!-- move it python custom script -->
+	<node pkg="mir_moveit_youbot_brsu_2" type="rockin_move_group.py" name="custom_moveit_script" output="screen" required="false"/>
+	
+</launch>

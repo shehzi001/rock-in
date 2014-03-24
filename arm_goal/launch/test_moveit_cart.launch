@@ -1,0 +1,27 @@
+<launch>
+
+	<!-- arguments -->
+	<arg name="sim" default="true" />
+	
+	<!-- real robot related launches -->
+	<group unless="$(arg sim)">
+		<!-- bringup -->
+		<include file="$(find mir_bringup)/robot.launch" />
+	</group>
+
+	<!-- sim robot related launches -->
+	<group if="$(arg sim)">
+		<!-- bringup sim -->
+		<include file="$(find mir_bringup_sim)/robot.launch" />
+	</group>
+	
+	<!-- move it master -->
+	<include file="$(find mir_moveit_youbot_brsu_2)/launch/move_group.launch"/>
+	
+	<!-- move it python custom script -->
+	<!-- node pkg="mir_moveit_youbot_brsu_2" type="rockin_move_group.py" name="custom_moveit_script" output="screen" required="true"/ -->
+	
+	<!-- rviz -->
+	<node pkg="rviz" type="rviz" name="rviz" output="screen" required="false"/>
+	
+</launch>

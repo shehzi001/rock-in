@@ -22,8 +22,8 @@ int main(int argc, char** argv)
 	{
 		try
 		{
-			listener.waitForTransform("/base_footprint", "/virtual_object", ros::Time::now(), ros::Duration(0.8));
-			listener.lookupTransform( "/base_footprint", "/virtual_object", ros::Time(0), listened_virtual_ob);
+			listener.waitForTransform("/base_footprint", "/graspable_object", ros::Time::now(), ros::Duration(0.8));
+			listener.lookupTransform( "/base_footprint", "/graspable_object", ros::Time(0), listened_virtual_ob);
 			ROS_INFO("Virtual object is available !");
 			virtual_object_available = true;
 		}
@@ -36,18 +36,6 @@ int main(int argc, char** argv)
 		
 		if(virtual_object_available == true)
 		{
-			/*
-			//debug stuff
-			double x = listened_virtual_ob.getOrigin().x();
-			float x2 = listened_virtual_ob.getOrigin().x();
-			
-			ROS_INFO("&&&&&&&&&&&&&");
-			ROS_INFO_STREAM(x);
-			ROS_INFO_STREAM(x2);
-			ROS_INFO_STREAM(listened_virtual_ob.getOrigin().x());
-			ROS_INFO("&&&&&&&&&&&&&");
-			*/
-			
 			//packing twist message to publish on /goal_end_effector_pose
 			virtual_ob_pose.position.x = listened_virtual_ob.getOrigin().x();
 			virtual_ob_pose.position.y = listened_virtual_ob.getOrigin().y();
